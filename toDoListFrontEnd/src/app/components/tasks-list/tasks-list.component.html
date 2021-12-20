@@ -1,1 +1,38 @@
-<p>tasks-list works!</p>
+<div class="wrapper">
+    <table>
+
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+            <tr *ngFor="let task of tasks">
+                    <div *ngIf="updatingTask == false">
+                        <td><input type="checkbox"></td>    
+                        <td>{{task.text}}</td>
+                        <td><input type="button" value="update" (click)="toggleUpdateForm()"></td>
+                        <td><input type="button" value="delete" (click)="deleteTask(task.id)"></td>  
+                    </div>
+                    <div *ngIf="updatingTask == true">
+                        <form>
+                            <input [formControl]="text" type="text" placeholder="{{task.text}}"> 
+                            <button type="button" (click)="updateTask(task.id)" [disabled]="!text.valid">Send</button>
+                            <input type="button" value="x" (click)="toggleUpdateForm()">
+                        </form>
+
+                    </div>
+            </tr>
+       
+
+    </table>
+    <button *ngIf="addingTask == false" (click)="toggleTaskForm()">Add new task</button>
+    <div *ngIf="addingTask == true">
+        
+        <form>
+            <input [formControl]="text" type="text" placeholder="Enter a new task"> 
+            <button type="button" (click)="addTask()" [disabled]="!text.valid">Send</button>
+            <input type="button" value="x" (click)="toggleTaskForm()">
+        </form>
+       
+    </div>
+    <button class="btn">Clear</button>
+</div>

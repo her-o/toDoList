@@ -1,0 +1,131 @@
+@charset "ISO-8859-1";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif
+ }
+
+ body {
+     background-color: rgb(80, 80, 80);
+ }
+
+ 
+ .wrapper {
+ 	 position: relative;
+     display: grid;
+     justify-items: center;
+     max-width: 400px;
+     min-height: 300px;
+     margin: 80px auto;
+     padding: 40px 30px 30px 30px;
+     background-color: rgba(255, 255, 255, 0.068);
+     border: 0.05px solid rgb(243, 243, 243);
+     border-radius: 5px;
+     box-shadow: 13px 13px 20px #d6d6d6, -13px -13px 20px #fff
+ }
+
+ table {
+    color: rgb(0, 0, 0);
+}
+
+table td{
+    border-top:0.5px solid rgb(0, 195, 255);
+    padding-top: 10px;
+}
+
+ .brand_logo_container {
+ 	position: absolute;
+    height: 70px;
+    width: 70px;
+    top: -30px;
+    left: 115px;
+    border-radius: 50%;
+    border-bottom: solid 1px #222222;
+    background: #bf37f5e8;
+    padding: 10px;
+    text-align: center;
+}
+
+.user_logo {
+	position: absolute;
+	 top: 2px;
+    left: 3px;
+}
+
+
+ .wrapper .name {
+     font-weight: 600;
+     font-size: 2rem;
+     letter-spacing: 1.3px;
+     padding-left: 10px;
+     margin-bottom:30px;
+     color: rgb(216, 216, 216);
+ }
+
+ .wrapper .form-field input {
+     width: 100%;
+     display: block;
+     border: none;
+     outline: none;
+     background: none;
+     font-size: 1rem;
+     color: rgb(199, 199, 199);
+     padding: 10px 15px 10px 10px;
+     margin-top: 15px;
+ }
+
+ .wrapper .form-field {
+     padding-left: 10px;
+     margin-bottom: 20px;
+     border-radius: 5px;
+     box-shadow: inset 1px 1px 1px #8f8f8f, inset -2px -2px 1px rgb(139, 139, 139)
+ }
+
+ .wrapper .form-field .fas {
+     color: #555;
+ }
+
+ .wrapper .btn {
+     box-shadow: none;
+     width: 50%;
+     height: 30px;
+     margin-top: 10px;
+     background-color: rgb(0, 195, 255);
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     letter-spacing: 1.3px;
+     font-weight: 600;
+    -webkit-transition: .5s all;   
+    -webkit-transition-delay: 0s; 
+ }
+
+ .wrapper .btn:hover {
+     background-color: #cc5bf7;
+ 	-webkit-transition-delay: 0.03s; 
+ }
+ 
+ .wrapper a {
+ 	 position: relative;
+     text-decoration: none;
+     font-size: 0.8rem;
+     color: white;
+     padding-top: 10px;
+     left: 40%;
+ }
+
+ .wrapper a:hover {
+     color: #bf37f5;
+ }
+
+ @media(max-width: 380px) {
+     .wrapper {
+         margin: 30px 20px;
+         padding: 40px 15px 15px 15px
+     }
+
+ }

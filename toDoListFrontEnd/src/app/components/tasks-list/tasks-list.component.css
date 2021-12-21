@@ -77,13 +77,14 @@
     height: 35px;
     max-height: 50px;
     font-size: 1rem;
+    cursor: default;
 }
 
 .row-text-true {
-    text-decoration: line-through;
+    border-bottom:0.5px solid rgb(33, 192, 4);
+    text-decoration: 2px solid line-through;
+    font-style: italic;
 }
-
-
 
 .row-input{
     border-bottom:0.5px solid rgb(0, 195, 255);
@@ -96,7 +97,7 @@
     font-size: 1rem;
 }
 
-.row-btn {
+.row-btn, .check-btn {
   width: 25px;
   height: 25px;
   size: 100%;
@@ -115,9 +116,17 @@
     color: rgb(122, 122, 122);
 }
 
+.unchecked:hover {
+    color:  rgb(182, 182, 182);
+}
+
 .checked {
     opacity: 100%;
     color: rgb(33, 192, 4);
+}
+
+.checked:hover {
+    color:  rgba(32, 192, 4, 0.781);
 }
 
 .add {
@@ -126,6 +135,10 @@
 
 .delete { 
     color: rgba(250, 103, 103, 0.883); 
+}
+
+.row-btn:hover {
+    font-size: larger;
 }
 
 .clear-btn {
@@ -141,6 +154,7 @@
     letter-spacing: 1px;
     font-size: 0.7rem;
     font-weight: 600;
+    cursor: pointer;
    -webkit-transition: .5s all;   
    -webkit-transition-delay: 0s;
 

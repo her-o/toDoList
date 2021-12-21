@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,9 +14,8 @@ export class TasksListComponent implements OnInit {
 
   tasks!: Task[];
   addingTask:boolean = false;
-  updatingTask:boolean = false;
   text: FormControl = new FormControl('',Validators.required);
-
+  defaultText!:string;
 
   constructor(private service:TaskService, private router: Router) {
 
@@ -57,7 +57,6 @@ export class TasksListComponent implements OnInit {
     this.service.updateTaskById(id, new Task(this.text.value)).subscribe({
       next:(data)=> {
         this.getAllTasks();
-        this.updatingTask = !this.updatingTask;
       },
       error:(error)=>console.log(error)
     });
@@ -80,10 +79,40 @@ export class TasksListComponent implements OnInit {
     this.addingTask = !this.addingTask;
   }
 
-  toggleUpdateForm() {
-    this.updatingTask = !this.updatingTask;
+  toggleUpdateForm(id: number) {
+
     this.addingTask = false;
-  }
+
+    for(let task in this.tasks) {
+      let taskToEdit = this.tasks[task];
+        if(taskToEdit.id == id) {
+          taskToEdit.isEditable = !taskToEdit.isEditable;
+          this.defaultText = taskToEdit.text;
+        } else {
+          taskToEdit.isEditable = false;
+        }
+      }
+    }
+
+    setStatus(id:number){
+
+      for(let task in this.tasks) {
+        let taskToEdit = this.tasks[task];
+
+          if(taskToEdit.id == id) {
+            taskToEdit.completed = !taskToEdit.completed;
+          } 
+        }
+    }
+
+    clearFinishedTasks() {
+      
+      for(let task in this.tasks) {
+        if(this.tasks[task].completed) {
+          this.deleteTask(this.tasks[task].id);
+        }
+        this.getAllTasks();
+      }
+    }
 
 }
-

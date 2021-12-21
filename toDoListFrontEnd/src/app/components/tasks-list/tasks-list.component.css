@@ -1,46 +1,115 @@
 @charset "ISO-8859-1";
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
- * {
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+* {
      margin: 0;
      padding: 0;
      box-sizing: border-box;
-     font-family: 'Poppins', sans-serif
+     font-family: 'Poppins', sans-serif;
+     text-decoration: none;
  }
 
  body {
      background-color: rgb(80, 80, 80);
  }
-
- 
  .wrapper {
  	 position: relative;
      display: flex;
      flex-direction: column;
-     justify-content: space-between;
-     max-width: 400px;
-     min-height: 300px;
+     justify-content: space-around;
+     align-content: center;
+     width: 400px;
+     height: 550px;
      margin: 80px auto;
      padding: 40px 30px 30px 30px;
      background-color: rgba(255, 255, 255, 0.068);
      border: 0.05px solid rgb(243, 243, 243);
      border-radius: 5px;
      box-shadow: 13px 13px 20px #d6d6d6, -13px -13px 20px #fff
-
  }
+ .navbar {
+    position: absolute;
+    height: 50px;
+    width: 90%;
+    top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-end;
+}
 
+
+.to-do-list-link {
+    font-family: 'Dancing Script', cursive;
+    color: rgba(0, 195, 255, 0.883);
+    font-size: 2rem;
+    margin-left: 20px;
+}
+
+.to-do-list-link:hover {
+    color: rgba(0, 195, 255, 0.692);
+}
+
+.completed-task-container {
+    width: 130px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.completed-task-container:hover > small {
+    opacity: 100%;
+}
+
+.completed-task-container > small {
+    justify-self: center;
+    align-self: center;
+    font-size: 0.7rem;
+    opacity: 0%;
+    text-overflow: none;
+}
+
+.completed-tasks-link {
+    height: 30px;
+    width: 30px;
+    padding-left: 50px;
+    padding-top: 10px;
+    font-size: 1rem;
+    color: rgba(0, 195, 255, 0.692);
+} 
+
+.completed-tasks-link:hover {
+    text-decoration: underline;
+    opacity: 80%;
+}
+
+
+ .table-container {
+     justify-self: center;
+     align-self: flex-start;
+     display: flex;
+     width: 350px;
+     height: 250px;
+     flex-direction: column;
+     justify-content: space-between;
+     align-content: center;
+     overflow: auto;
+ }
  .add-button {
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25px;
     background-color: rgba(0, 195, 255, 0.883); 
     border: none; 
-    border-radius: 50%;
     color: white; 
-    padding: 3px; 
-    margin-left: 2px;
+    margin-left: 15px;
     font-size: 14px; 
     cursor: pointer; 
+ }
+
+ .add-button:disabled {
+    background-color: rgba(190, 190, 190, 0.883); 
  }
 
  .add-button:hover {
@@ -48,14 +117,24 @@
  }
 
  .add-input {
-    border:0.5px solid rgb(0, 195, 255);
-    padding: 5px;
-    margin-left: 30px;
-    width: 250px;
+    border: none;
+    padding: 15px;
+    margin-left: 75px;
+    width: 205px;
     height: 35px;
     font-size: 1rem;
     text-decoration: dashed;
  }
+
+ .add-input:hover {
+    border:0.1px solid rgb(240, 240, 240);
+ }
+
+ .add-input:focus {
+    outline: none;
+    border: none;
+    border-bottom: 0.5px solid rgba(0, 195, 255, 0.883); 
+}
 
 .row-container {
     display: flex;
@@ -141,27 +220,47 @@
     font-size: larger;
 }
 
-.clear-btn {
-    width: 50%;
-    height: 30px;
-    justify-self: flex-end;
-    align-self: center;
-    margin-top: 20px;
-    background-color: rgb(0, 195, 255);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    letter-spacing: 1px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    cursor: pointer;
-   -webkit-transition: .5s all;   
-   -webkit-transition-delay: 0s;
+.clear-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
+}
+
+.clear-container > p {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 100;
+    color: rgb(131, 131, 131);
+    opacity: 0%;
+    -webkit-transition: .2s ease-out;   
+}
+
+.clear-container:hover > p {
+    opacity: 100%;
+    -webkit-transition: .2s ease-out;  
+    
+}
+
+.clear-btn {
+    height: 50px;
+    width: 50px;
+    align-self: center;
+    background-color: rgb(223, 223, 223);
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-transition: .2s ease-out; 
 }
 
 .clear-btn:hover {
     background-color: #e298ff;
-    -webkit-transition-delay: 0.03s; 
+    -webkit-transition: .2s ease-out; 
+  
 }
+
+
+
 

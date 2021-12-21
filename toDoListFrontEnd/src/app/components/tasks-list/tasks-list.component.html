@@ -1,42 +1,48 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <div class="wrapper">
-        <div class="add-container">
-            <button class="add-button" 
-                    *ngIf="addingTask == false" 
-                    (click)="toggleTaskForm()"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-            </button>
-            <div *ngIf="addingTask == true">
-                <form>
-                    <input  class="add-input" [formControl]="text" type="text" placeholder="Enter a new task"> 
-                    <button class="row-btn add" type="button" (click)="addTask()" [disabled]="!text.valid"><i class="fa fa-arrow-right"></i></button>
-                    <button class="row-btn add" type="button" (click)="toggleTaskForm()"><i class="fa fa-window-close"></i></button>
-                </form>
-            </div>  
+
+        <div class="wrapper">
+            <nav class="navbar">
+                <a class="to-do-list-link" href="/">To Do List</a>
+                <div class="completed-task-container">
+                    <a class="completed-tasks-link" href="/completedTasks"><i class="fa fa-list"></i></a>
+                    <small>Completed Tasks</small>
+                </div>
+            </nav>
+            <div class="add-container">
+                    <form>
+                        <input  class="add-input" [formControl]="text" type="text" placeholder="Enter a new task"> 
+                        <button class="add-button" type="button" (click)="addTask()" [disabled]="!text.valid"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                    </form> 
+            </div>
+            <div class="table-container">
+                <table>
+                    <tr *ngFor="let task of tasks">
+                            <div class="row-container">
+                            <div [ngSwitch]="task.completed">
+                                <td *ngSwitchDefault><button class="row-btn unchecked" type="button" (click)="setStatus(task.id)" [disabled]="task.isEditable"><i class="fa fa-check-circle"></i></button></td> 
+                                <td *ngSwitchCase="true"><button class="row-btn checked" type="button" (click)="setStatus(task.id)"[disabled]="task.isEditable"><i class="fa fa-check-circle"></i></button></td> 
+                            </div>
+                                <div [ngSwitch]="task.isEditable">
+                                    <div *ngSwitchDefault>
+                                        <td [className]="'row-text-' + task.completed">{{task.text}}</td>
+                                        <td><button class="row-btn update" type="button" (click)="toggleUpdateForm(task.id)"><i class="fa fa-pencil"></i></button></td>
+                                        <td><button class= "row-btn delete" type="button" (click)="deleteTask(task.id)"><i class="fa fa-trash"></i></button></td>  
+                                    </div> 
+                                    <div *ngSwitchCase="true">
+                                        <form>
+                                            <input  class="row-input" [formControl]="text" type="text" [(ngModel)]="defaultText">    
+                                            <button class= "row-btn" type="button" (click)="updateTask(task.id)" [disabled]="!text.valid"><i class="fa fa-arrow-right"></i></button>
+                                            <button class="row-btn" type="button" value="x" (click)="toggleUpdateForm(task.id)"><i class="fa fa-window-close"></i></button>
+                                        </form>
+                                   </div> 
+                                </div>
+                            </div>
+                        </tr>
+                </table>    
+            </div>
+        <div class="clear-container">
+            <button class="clear-btn" (click)="clearFinishedTasks()"><i class="fa fa-check"></i></button>
+            <p class= "clear-text">Clear completed tasks</p>
         </div>
-        <table>
-            <tr *ngFor="let task of tasks">
-                    <div class="row-container">
-                    <div [ngSwitch]="task.completed">
-                        <td *ngSwitchDefault><button class="row-btn unchecked" type="button" (click)="setStatus(task.id)" [disabled]="task.isEditable"><i class="fa fa-check-circle"></i></button></td> 
-                        <td *ngSwitchCase="true"><button class="row-btn checked" type="button" (click)="setStatus(task.id)"[disabled]="task.isEditable"><i class="fa fa-check-circle"></i></button></td> 
-                    </div>
-                        <div [ngSwitch]="task.isEditable">
-                            <div *ngSwitchDefault>
-                                <td [className]="'row-text-' + task.completed">{{task.text}}</td>
-                                <td><button class="row-btn update" type="button" (click)="toggleUpdateForm(task.id)"><i class="fa fa-pencil"></i></button></td>
-                                <td><button class= "row-btn delete" type="button" (click)="deleteTask(task.id)"><i class="fa fa-trash"></i></button></td>  
-                            </div> 
-                            <div *ngSwitchCase="true">
-                                <form>
-                                    <input  class="row-input" [formControl]="text" type="text" [(ngModel)]="defaultText">    
-                                    <button class= "row-btn" type="button" (click)="updateTask(task.id)" [disabled]="!text.valid"><i class="fa fa-arrow-right"></i></button>
-                                    <button class="row-btn" type="button" value="x" (click)="toggleUpdateForm(task.id)"><i class="fa fa-window-close"></i></button>
-                                </form>
-                           </div> 
-                        </div>
-                    </div>
-                </tr>
-        </table>
- 
-    <button class="clear-btn" (click)="clearFinishedTasks()">Clear completed tasks</button>
 </div>
+    

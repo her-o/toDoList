@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <div class="wrapper"> 
+        <nav class="navbar">
+            <a class="to-do-list-link" href="/">To Do List</a>
+        </nav>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th class="table-header">Tasks</th>
+                    <th class="table-header">Date</th>
+                </tr>
+                <tr *ngFor="let completedTask of completedTasks">
+                    <td class="table-row text">{{completedTask.text}}</td>
+                    <td class="table-row date">{{completedTask.date}}</td>
+                </tr>
+            </table>
+        </div>
+</div>

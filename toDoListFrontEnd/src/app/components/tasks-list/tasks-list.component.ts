@@ -1,8 +1,9 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CompletedTask } from 'src/app/model/completed-task';
 import { Task } from 'src/app/model/task';
+import { CompletedTaskService } from 'src/app/services/completed-task.service';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
@@ -14,10 +15,12 @@ export class TasksListComponent implements OnInit {
 
   tasks!: Task[];
   addingTask:boolean = false;
-  text: FormControl = new FormControl('',Validators.required);
+  text: FormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
   defaultText!:string;
 
-  constructor(private service:TaskService, private router: Router) {
+  constructor(private service:TaskService, 
+              private completedTaskService: CompletedTaskService, 
+              private router: Router) {
 
    }
 
@@ -106,13 +109,26 @@ export class TasksListComponent implements OnInit {
     }
 
     clearFinishedTasks() {
-      
+
       for(let task in this.tasks) {
         if(this.tasks[task].completed) {
+          const completedTask = this.buildCompletedTask(this.tasks[task]);
+          this.completedTaskService.addCompletedTask(completedTask).subscribe({
+            next:(data) => console.log("Completed Task successfully added!"),
+            error: (error) => console.log(error)
+          });
+
           this.deleteTask(this.tasks[task].id);
+
         }
         this.getAllTasks();
       }
+    }
+
+    buildCompletedTask(task:Task):CompletedTask {
+          let text = task.text;
+          let date = new Date().toLocaleDateString("en-US");
+          return new CompletedTask(text, date);
     }
 
 }
